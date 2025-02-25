@@ -10,7 +10,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/employeepayrollservice")
+@RequestMapping("/employee")
 public class EmployeePayrollController {
 
     @Autowired
@@ -21,7 +21,7 @@ public class EmployeePayrollController {
         return employeePayrollService.createEmployee(employeeDTO);
     }
 
-    @GetMapping("/")
+    @GetMapping("/getAll")
     public List<Employee> getAllEmployees() {
         return employeePayrollService.getAllEmployees();
     }
