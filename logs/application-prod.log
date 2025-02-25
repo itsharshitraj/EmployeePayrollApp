@@ -1,0 +1,39 @@
+2025-02-25 19:26:24 [restartedMain] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Failed to bind properties under 'logging.level.com.bridgelabz' to org.springframework.boot.logging.LogLevel:
+
+    Property: logging.level.com.bridgelabz
+    Value: "INFO  # Reduce verbosity in production"
+    Origin: class path resource [application-prod.properties] - 10:30
+    Reason: failed to convert java.lang.String to org.springframework.boot.logging.LogLevel (caused by java.lang.IllegalArgumentException: No enum constant org.springframework.boot.logging.LogLevel.INFO  # Reduce verbosity in production)
+
+Action:
+
+Update your application's configuration. The following values are valid:
+
+    DEBUG
+    ERROR
+    FATAL
+    INFO
+    OFF
+    TRACE
+    WARN
+
+2025-02-25 19:28:17 [restartedMain] INFO  c.b.e.EmployeePayrollApplication - Starting EmployeePayrollApplication using Java 20.0.2 with PID 30572 (C:\employeepayrollapp\employeepayrollapp\target\classes started by itsha in C:\employeepayrollapp\employeepayrollapp)
+2025-02-25 19:28:17 [restartedMain] INFO  c.b.e.EmployeePayrollApplication - The following 1 profile is active: "prod"
+2025-02-25 19:28:20 [restartedMain] WARN  c.z.hikari.util.DriverDataSource - Registered driver with driverClassName=com.mysql.jdbc.Driver was not found, trying direct instantiation.
+2025-02-25 19:28:21 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-02-25 19:28:22 [restartedMain] INFO  c.b.e.EmployeePayrollApplication - Started EmployeePayrollApplication in 6.067 seconds (process running for 6.931)
+2025-02-25 19:28:22 [restartedMain] INFO  c.b.e.EmployeePayrollApplication - EmployeePayrollApplication started
+2025-02-25 19:28:46 [restartedMain] INFO  c.b.e.EmployeePayrollApplication - Starting EmployeePayrollApplication using Java 20.0.2 with PID 12804 (C:\employeepayrollapp\employeepayrollapp\target\classes started by itsha in C:\employeepayrollapp\employeepayrollapp)
+2025-02-25 19:28:46 [restartedMain] INFO  c.b.e.EmployeePayrollApplication - The following 1 profile is active: "prod"
+2025-02-25 19:28:48 [restartedMain] WARN  c.z.hikari.util.DriverDataSource - Registered driver with driverClassName=com.mysql.jdbc.Driver was not found, trying direct instantiation.
+2025-02-25 19:28:50 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-02-25 19:28:50 [restartedMain] INFO  c.b.e.EmployeePayrollApplication - Started EmployeePayrollApplication in 5.339 seconds (process running for 6.141)
+2025-02-25 19:28:50 [restartedMain] INFO  c.b.e.EmployeePayrollApplication - EmployeePayrollApplication started
