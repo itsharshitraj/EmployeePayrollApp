@@ -33,4 +33,5 @@ build/
 .vscode/
 
 dev-logs.log
-
+application-prod.log
+logs/
