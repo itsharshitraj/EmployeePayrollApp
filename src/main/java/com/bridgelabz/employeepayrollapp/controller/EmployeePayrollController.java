@@ -1,46 +1,52 @@
-package  com.bridgelabz.employeepayrollapp.controller;
+package com.bridgelabz.employeepayrollapp.controller;
 
 import com.bridgelabz.employeepayrollapp.service.EmployeePayrollService;
-import org.springframework.beans.factory.annotation.Autowired;
 import com.bridgelabz.employeepayrollapp.dto.EmployeeDTO;
 import com.bridgelabz.employeepayrollapp.model.Employee;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.util.List;
 
-
 @RestController
-@RequestMapping(value = "/employee",produces = "application/json")
+@RequestMapping(value = "/employee", produces = "application/json")
 public class EmployeePayrollController {
-    private static final Logger log = LoggerFactory.getLogger(EmployeePayrollController.class); // ✅ Manually declare logger
+    private static final Logger log = LoggerFactory.getLogger(EmployeePayrollController.class);
 
     @Autowired
     private EmployeePayrollService employeePayrollService;
 
     @PostMapping("/create")
-    public String createEmployee(@RequestBody EmployeeDTO employeeDTO) {
-        return employeePayrollService.createEmployee(employeeDTO);
+    public ResponseEntity<String> createEmployee(@Valid @RequestBody EmployeeDTO employeeDTO) {
+        String response = employeePayrollService.createEmployee(employeeDTO);
+        return ResponseEntity.ok(response);
     }
 
-    @GetMapping(value = "/getAll", produces = "application/json")
-    public List<Employee> getAllEmployees() {
-        return employeePayrollService.getAllEmployees();
+    @GetMapping("/getAll")
+    public ResponseEntity<List<Employee>> getAllEmployees() {
+        List<Employee> employees = employeePayrollService.getAllEmployees();
+        return ResponseEntity.ok(employees);
     }
 
     @GetMapping("/get/{id}")
-    public Employee getEmployeeById(@PathVariable int id) {
-        return employeePayrollService.getEmployeeById(id);
+    public ResponseEntity<Employee> getEmployeeById(@PathVariable int id) {
+        Employee employee = employeePayrollService.getEmployeeById(id);
+        return ResponseEntity.ok(employee);
     }
 
     @PutMapping("/update/{id}")
-    public String updateEmployee(@PathVariable int id, @RequestBody EmployeeDTO employeeDTO) {
-        return employeePayrollService.updateEmployee(id, employeeDTO);
+    public ResponseEntity<String> updateEmployee(@PathVariable int id, @Valid @RequestBody EmployeeDTO employeeDTO) {
+        String response = employeePayrollService.updateEmployee(id, employeeDTO);
+        return ResponseEntity.ok(response);
     }
 
     @DeleteMapping("/delete/{id}")
-    public String deleteEmployee(@PathVariable int id) {
-        return employeePayrollService.deleteEmployee(id);
+    public ResponseEntity<String> deleteEmployee(@PathVariable int id) {
+        String response = employeePayrollService.deleteEmployee(id);
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/logTest")
