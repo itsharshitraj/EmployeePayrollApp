@@ -1,23 +1,48 @@
 package com.bridgelabz.employeepayrollapp.model;
 
-import com.bridgelabz.employeepayrollapp.dto.EmployeeDTO;
-
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-
-@Data
-@NoArgsConstructor
+import jakarta.persistence.*;
+@Entity
+@Table(name = "employee_payroll")
 public class Employee {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @Column(nullable = false)
     private String name;
+
+    @Column(nullable = false)
     private double salary;
 
-    public Employee(EmployeeDTO employeeDTO) {
-        this.name = employeeDTO.getName();
-        this.salary = employeeDTO.getSalary();
+    public Employee() {}
+
+    public Employee(int id, String name, double salary) {
+        this.id = id;
+        this.name = name;
+        this.salary = salary;
     }
-    @Override
-    public String toString() {
-        return "Employee{name='" + name + "', salary=" + salary + "}";
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(double salary) {
+        this.salary = salary;
     }
 }
