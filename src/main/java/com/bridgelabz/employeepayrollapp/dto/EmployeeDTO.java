@@ -1,25 +1,20 @@
 package com.bridgelabz.employeepayrollapp.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.PastOrPresent;
-import jakarta.validation.constraints.Pattern;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import jakarta.validation.constraints.*;
+import lombok.*;
 
 import java.time.LocalDate;
 
 
 @Data
-@Getter
-@Setter
-@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class EmployeeDTO {
     @NotBlank(message = "Name cannot be empty")
     private String name;
-
+    
+    @Min(value = 10000, message = "Salary must be at least 10,000")
     private double salary;
 
     @NotBlank(message = "Gender cannot be empty")

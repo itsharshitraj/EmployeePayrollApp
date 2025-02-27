@@ -41,6 +41,7 @@ public class EmployeePayrollController {
 
     @PutMapping("/update/{id}")
     public ResponseEntity<String> updateEmployee(@PathVariable int id, @Valid @RequestBody EmployeeDTO employeeDTO) {
+        log.info("Received request to update employee: ID = {}, Data = {}", id, employeeDTO);
         String response = employeePayrollService.updateEmployee(id, employeeDTO);
         return ResponseEntity.ok(response);
     }
