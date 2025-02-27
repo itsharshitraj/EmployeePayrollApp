@@ -3,7 +3,7 @@ package com.bridgelabz.employeepayrollapp.dto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.*;
 import lombok.*;
-
+import java.util.List;
 import java.time.LocalDate;
 
 
@@ -31,6 +31,9 @@ public class EmployeeDTO {
     @NotBlank(message = "Profile picture cannot be empty")
     private String profilePic;
 
-    @NotBlank(message = "Department cannot be empty")
-    private String department;
+
+    @NotEmpty(message = "Department cannot be empty")
+    private List<String> department;  // Change from String to List<String>
+
+
 }

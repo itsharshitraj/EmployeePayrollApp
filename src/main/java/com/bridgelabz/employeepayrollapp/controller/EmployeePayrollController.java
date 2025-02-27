@@ -21,11 +21,12 @@ public class EmployeePayrollController {
 
     @PostMapping("/create")
     public ResponseEntity<String> createEmployee(@Valid @RequestBody EmployeeDTO employeeDTO) {
-        log.info("Received request to create employee: Name = {}, Salary = {}",
-                employeeDTO.getName(), employeeDTO.getSalary());
+        log.info("Received request to create employee: Name = {}, Salary = {}, Department = {}",
+                employeeDTO.getName(), employeeDTO.getSalary(), employeeDTO.getDepartment());
         String response = employeePayrollService.createEmployee(employeeDTO);
         return ResponseEntity.ok(response);
     }
+
 
     @GetMapping("/getAll")
     public ResponseEntity<List<Employee>> getAllEmployees() {
@@ -52,12 +53,4 @@ public class EmployeePayrollController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/logTest")
-    public String testLogging() {
-        log.debug("This is a DEBUG log message");
-        log.info("This is an INFO log message");
-        log.warn("This is a WARN log message");
-        log.error("This is an ERROR log message");
-        return "Logging Test Completed!";
-    }
 }

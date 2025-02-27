@@ -27,7 +27,11 @@ public class EmployeePayrollService {
         employee.setStartDate(employeeDTO.getStartDate());
         employee.setNote(employeeDTO.getNote());
         employee.setProfilePic(employeeDTO.getProfilePic());
-        employee.setDepartment(employeeDTO.getDepartment());
+
+        log.info("Before setting department: {}", employeeDTO.getDepartment());  // Debug
+        employee.setDepartment(new ArrayList<>(employeeDTO.getDepartment()));  // ✅ Convert List<String>
+
+        log.info("After setting department: {}", employee.getDepartment());  // Deb
 
 
         employeeRepository.save(employee);
@@ -44,8 +48,10 @@ public class EmployeePayrollService {
 
     public Employee getEmployeeById(int id) {
         log.info("Fetching employee with ID: {}", id);
-        return employeeRepository.findById(id)
+       Employee employee = employeeRepository.findById(id)
                 .orElseThrow(() -> new EmployeeNotFoundException("Employee with ID " + id + " not found"));
+        log.info("Employee fetched: Name={}, Departments={}", employee.getName(), employee.getDepartment());
+        return employee;
     }
 
     public String updateEmployee(int id, EmployeeDTO employeeDTO) {
@@ -57,6 +63,7 @@ public class EmployeePayrollService {
         employee.setNote(employeeDTO.getNote());
         employee.setProfilePic(employeeDTO.getProfilePic());
         employee.setDepartment(employeeDTO.getDepartment());
+        log.info("Saving Employee: Name = {}, Departments = {}", employee.getName(), employee.getDepartment());
 
         employeeRepository.save(employee);
         log.info("Employee with ID {} updated successfully", id);
