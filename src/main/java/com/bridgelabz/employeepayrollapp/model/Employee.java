@@ -1,48 +1,35 @@
 package com.bridgelabz.employeepayrollapp.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+import java.time.LocalDate;
+
 @Entity
 @Table(name = "employee_payroll")
+@Data
+@NoArgsConstructor
+@Getter
+@Setter
+@ToString
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(nullable = false)
     private String name;
-
-    @Column(nullable = false)
     private double salary;
+    private String gender;
 
-    public Employee() {}
+    @JsonFormat(pattern = "dd MMM yyyy")
+    private LocalDate startDate;
 
-    public Employee(int id, String name, double salary) {
-        this.id = id;
-        this.name = name;
-        this.salary = salary;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public double getSalary() {
-        return salary;
-    }
-
-    public void setSalary(double salary) {
-        this.salary = salary;
-    }
+    private String note;
+    private String profilePic;
+    private String department;
 }
