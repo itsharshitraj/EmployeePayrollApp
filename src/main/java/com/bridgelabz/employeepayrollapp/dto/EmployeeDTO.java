@@ -1,42 +1,41 @@
 package com.bridgelabz.employeepayrollapp.dto;
 
-import jakarta.validation.constraints.NotEmpty;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Pattern;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+import java.time.LocalDate;
 
 
+@Data
+@Getter
+@Setter
+@ToString
 public class EmployeeDTO {
-    @NotEmpty(message = "Name cannot be empty")
-    @Pattern(regexp = "^[A-Z][a-zA-Z ]{2,}$", message = "Name must start with a capital letter and have at least 3 characters")
-
+    @NotBlank(message = "Name cannot be empty")
     private String name;
 
     private double salary;
 
+    @NotBlank(message = "Gender cannot be empty")
+    @Pattern(regexp = "Male|Female|Other", message = "Gender should be Male, Female, or Other")
+    private String gender;
 
-    public EmployeeDTO() {
-    }
+    @PastOrPresent(message = "Start date must be in the past or present")
+    @JsonFormat(pattern = "dd MMM yyyy")
+    private LocalDate startDate;
 
+    @NotBlank(message = "Note cannot be empty")
+    private String note;
 
-    public EmployeeDTO(String name, double salary) {
-        this.name = name;
-        this.salary = salary;
-    }
+    @NotBlank(message = "Profile picture cannot be empty")
+    private String profilePic;
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public double getSalary() {
-        return salary;
-    }
-
-    public void setSalary(double salary) {
-        this.salary = salary;
-
-    }
+    @NotBlank(message = "Department cannot be empty")
+    private String department;
 }
-
