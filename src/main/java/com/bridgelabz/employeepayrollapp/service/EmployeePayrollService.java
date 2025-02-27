@@ -51,6 +51,11 @@ public class EmployeePayrollService {
         return employee;
     }
 
+    public List<Employee> getEmployeesByDepartment(String department) {
+        log.info("Fetching Employees from Department: {}", department);
+        return employeeRepository.findEmployeesByDepartment(department);
+    }
+
 
     @Transactional
     public String updateEmployee(int id, EmployeeDTO employeeDTO) {

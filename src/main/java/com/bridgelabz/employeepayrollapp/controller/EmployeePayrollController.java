@@ -55,4 +55,9 @@ public class EmployeePayrollController {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping("/department/{department}")
+    public List<Employee> getEmployeesByDepartment(@PathVariable String department) {
+        return employeePayrollService.getEmployeesByDepartment(department);
+    }
+
 }
