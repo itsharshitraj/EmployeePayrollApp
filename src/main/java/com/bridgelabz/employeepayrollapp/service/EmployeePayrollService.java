@@ -2,6 +2,7 @@ package com.bridgelabz.employeepayrollapp.service;
 
 import com.bridgelabz.employeepayrollapp.dto.EmployeeDTO;
 import com.bridgelabz.employeepayrollapp.model.Employee;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import com.bridgelabz.employeepayrollapp.exception.EmployeeNotFoundException;
 import com.bridgelabz.employeepayrollapp.repository.EmployeeRepository;
@@ -20,6 +21,7 @@ public class EmployeePayrollService {
     private EmployeeRepository employeeRepository;
 
     public String createEmployee(EmployeeDTO employeeDTO) {
+        log.info("Creating Employee: {}", employeeDTO.getName());
         Employee employee = new Employee();
         employee.setName(employeeDTO.getName());
         employee.setSalary(employeeDTO.getSalary());
@@ -27,12 +29,8 @@ public class EmployeePayrollService {
         employee.setStartDate(employeeDTO.getStartDate());
         employee.setNote(employeeDTO.getNote());
         employee.setProfilePic(employeeDTO.getProfilePic());
-
-        log.info("Before setting department: {}", employeeDTO.getDepartment());  // Debug
-        employee.setDepartment(new ArrayList<>(employeeDTO.getDepartment()));  // ✅ Convert List<String>
-
-        log.info("After setting department: {}", employee.getDepartment());  // Deb
-
+        employee.setDepartment(new ArrayList<>(employeeDTO.getDepartment()));
+        log.info("Saving Employee: Name = {}, Departments = {}", employee.getName(), employee.getDepartment());
 
         employeeRepository.save(employee);
         log.info("Employee created successfully: {}", employee);
@@ -42,36 +40,40 @@ public class EmployeePayrollService {
     public List<Employee> getAllEmployee() {
         log.info("Fetching all employees from database...");
         List<Employee> employees = employeeRepository.findAll();
-        log.info("Total employees found: {}", employees.size());
-        return employees;
+        log.info("Total Employees Found: {}", employees.size());
+        return employeeRepository.findAll();
     }
-
     public Employee getEmployeeById(int id) {
-        log.info("Fetching employee with ID: {}", id);
-       Employee employee = employeeRepository.findById(id)
+        Employee employee = employeeRepository.findById(id)
                 .orElseThrow(() -> new EmployeeNotFoundException("Employee with ID " + id + " not found"));
-        log.info("Employee fetched: Name={}, Departments={}", employee.getName(), employee.getDepartment());
+
+        log.info("Fetched Employee: Name = {}, Departments = {}", employee.getName(), employee.getDepartment());
         return employee;
     }
 
+
+    @Transactional
     public String updateEmployee(int id, EmployeeDTO employeeDTO) {
+        log.info("Updating Employee with ID: {}", id);
         Employee employee = getEmployeeById(id);
+
         employee.setName(employeeDTO.getName());
         employee.setSalary(employeeDTO.getSalary());
         employee.setGender(employeeDTO.getGender());
         employee.setStartDate(employeeDTO.getStartDate());
         employee.setNote(employeeDTO.getNote());
         employee.setProfilePic(employeeDTO.getProfilePic());
-        employee.setDepartment(employeeDTO.getDepartment());
-        log.info("Saving Employee: Name = {}, Departments = {}", employee.getName(), employee.getDepartment());
+        employee.setDepartment(new ArrayList<>(employeeDTO.getDepartment()));
 
         employeeRepository.save(employee);
         log.info("Employee with ID {} updated successfully", id);
         return "Employee with ID " + id + " updated successfully";
     }
-
+    @Transactional
     public String deleteEmployee(int id) {
+        log.info("Deleting Employee with ID: {}", id);
         Employee employee = getEmployeeById(id);
+
         employeeRepository.delete(employee);
         log.info("Employee with ID {} deleted successfully", id);
         return "Employee with ID " + id + " deleted successfully";
